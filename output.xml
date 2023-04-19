@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20230314 14:39:28.523" schemaversion="2" generator="Robot 4.1.3 (Python 2.7.18 on win32)">
+<suite source="D:\POC\RobotAPI" id="s1" name="RobotAPI">
+<suite source="D:\POC\RobotAPI\API.robot" id="s1-s1" name="API">
+<test id="s1-s1-t1" name="API Call4">
+<kw name="GET" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${baseUrl}/us/90210</arg>
+<doc>Sends a GET request.</doc>
+<msg timestamp="20230314 14:39:29.246" level="INFO">GET Request : url=http://api.zippopotam.us/us/90210 
+ path_url=/us/90210 
+ headers={'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'User-Agent': 'python-requests/2.27.1'} 
+ body=None 
+ </msg>
+<msg timestamp="20230314 14:39:29.246" level="INFO">GET Response : url=http://api.zippopotam.us/us/90210 
+ status=200, reason=OK 
+ headers={'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'x-cache': 'hit', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'CF-Cache-Status': 'DYNAMIC', 'charset': 'UTF-8', 'vary': 'Accept-Encoding', 'Server': 'cloudflare', 'Connection': 'keep-alive', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Xb%2BH2iL2gLXxsqLjwvI1uVnfx3IfzOEDRaoB51rJN%2FGCkbTl1nUWN4%2FBkgrKMGisK%2BuJ7DTHgfrLXYzQw%2BU1nC1Ndwn6DDMgzTj53gQmRwnybZhKGhPMR5QLnO410LfL7Vy6HA%3D%3D"}],"group":"cf-nel","max_age":604800}', 'Date': 'Tue, 14 Mar 2023 12:39:29 GMT', 'access-control-allow-origin': '*', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400', 'Content-Type': 'application/json', 'CF-RAY': '7a7c9466ac650d9e-MRS'} 
+ body={"post code": "90210", "country": "United States", "country abbreviation": "US", "places": [{"place name": "Beverly Hills", "longitude": "-118.4065", "state": "California", "state abbreviation": "CA", "latitude": "34.0901"}]} 
+ </msg>
+<msg timestamp="20230314 14:39:29.247" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" endtime="20230314 14:39:29.247" starttime="20230314 14:39:28.905"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${value}</var>
+<arg>${response.json()}[places]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230314 14:39:29.254" level="INFO">${value} = [{u'latitude': u'34.0901', u'state': u'California', u'state abbreviation': u'CA', u'place name': u'Beverly Hills', u'longitude': u'-118.4065'}]</msg>
+<status status="PASS" endtime="20230314 14:39:29.255" starttime="20230314 14:39:29.248"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${myValue}</var>
+<arg>${value}</arg>
+<arg>$[?(@.state=='California')].'state abbreviation'</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20230314 14:39:29.314" level="INFO">${myValue} = [u'CA']</msg>
+<status status="PASS" endtime="20230314 14:39:29.314" starttime="20230314 14:39:29.256"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${myValue}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230314 14:39:29.315" level="INFO">[u'CA']</msg>
+<status status="PASS" endtime="20230314 14:39:29.315" starttime="20230314 14:39:29.314"/>
+</kw>
+<status status="PASS" endtime="20230314 14:39:29.316" starttime="20230314 14:39:28.904"/>
+</test>
+<status status="PASS" endtime="20230314 14:39:29.319" starttime="20230314 14:39:28.571"/>
+</suite>
+<status status="PASS" endtime="20230314 14:39:29.322" starttime="20230314 14:39:28.528"/>
+</suite>
+<statistics>
+<total>
+<stat fail="0" skip="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" skip="0" id="s1" name="RobotAPI" pass="1">RobotAPI</stat>
+<stat fail="0" skip="0" id="s1-s1" name="API" pass="1">RobotAPI.API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
